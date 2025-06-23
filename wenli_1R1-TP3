@@ -1,28 +1,48 @@
 #include <stdio.h>
 
-int main()
-{
+int main() {
     int peso;
     float altura;
-    float imc=0;
-    printf("ingrese el peso en kg:");
-    scanf("%d",& peso);
-    printf("ingrese la altura en metros:");
-    scanf("%f",& altura);
-    imc=peso/(altura*altura);
-    if(imc<18.5){
-        printf("su indice de masa corporal es:%f(peso bajo)\n",imc);
+    float imc = 0;
+
+    // Validar que el peso no sea negativo o cero
+    do {
+        printf("Ingrese el peso en kg: ");
+        scanf("%d", &peso);
+        if (peso <= 0) {
+            printf("Error: El peso debe ser un número positivo mayor que cero.\n");
+        }
+    } while (peso <= 0);
+
+    // Validar que la altura no sea negativa o cero
+    do {
+        printf("Ingrese la altura en metros: ");
+        scanf("%f", &altura);
+        if (altura <= 0) {
+            printf("Error: La altura debe ser un número positivo mayor que cero.\n");
+        }
+    } while (altura <= 0);
+
+    
+    imc = peso / (altura * altura);
+
+   
+    if (imc < 18.5) {
+        printf("Su índice de masa corporal es: %.2f (Peso bajo)\n", imc);
+    } else if (imc >= 18.5 && imc <= 24.9) {
+        printf("Su índice de masa corporal es: %.2f (Peso normal)\n", imc);
+    } else if (imc >= 25.0 && imc <= 29.9) {
+        printf("Su índice de masa corporal es: %.2f (Sobrepeso)\n", imc);
+    } else if (imc >= 30.0) {
+        printf("Su índice de masa corporal es: %.2f (Obesidad)\n", imc);
     }
-        else if((imc>=18.5) &&(imc<=25.9)){
-        printf("su indice de masa corporal es:%f(peso normal)\n",imc);
-        }
-        else if((imc>=25.0)&&(imc<=29.9)){
-         printf("su indice de masa corporal es:%f(sobrepeso)\n",imc);
-        }
-         else if(imc>=30.0){
-         printf("su indice de masa corporal es:%f(obesidad)\n",imc);
-         }
-         printf("tabla de referencia:\n imc<18.5 | Bajo peso\n 18.5 a 24.9 | Normal\n 25.0 a 29.9 | Sobrepeso\n >=30| Obesidad\n");
-         
+
+  
+    printf("\nTabla de referencia:\n");
+    printf("IMC < 18.5       | Bajo peso\n");
+    printf("18.5 a 24.9      | Normal\n");
+    printf("25.0 a 29.9      | Sobrepeso\n");
+    printf(">= 30.0          | Obesidad\n");
+
     return 0;
 }
